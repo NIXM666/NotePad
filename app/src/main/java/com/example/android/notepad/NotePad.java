@@ -38,7 +38,8 @@ public final class NotePad {
     public static final class Notes implements BaseColumns {
 
         // This class cannot be instantiated
-        private Notes() {}
+        private Notes() {
+        }
 
         /**
          * The table name offered by this provider
@@ -81,27 +82,27 @@ public final class NotePad {
         /**
          * The content:// style URL for this table
          */
-        public static final Uri CONTENT_URI =  Uri.parse(SCHEME + AUTHORITY + PATH_NOTES);
+        public static final Uri CONTENT_URI = Uri.parse(SCHEME + AUTHORITY + PATH_NOTES);
 
         /**
          * The content URI base for a single note. Callers must
          * append a numeric note id to this Uri to retrieve a note
          */
         public static final Uri CONTENT_ID_URI_BASE
-            = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID);
+                = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID);
 
         /**
          * The content URI match pattern for a single note, specified by its ID. Use this to match
          * incoming URIs or to construct an Intent.
          */
         public static final Uri CONTENT_ID_URI_PATTERN
-            = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID + "/#");
+                = Uri.parse(SCHEME + AUTHORITY + PATH_NOTE_ID + "/#");
 
         /**
          * The content Uri pattern for a notes listing for live folders
          */
         public static final Uri LIVE_FOLDER_URI
-            = Uri.parse(SCHEME + AUTHORITY + PATH_LIVE_FOLDER);
+                = Uri.parse(SCHEME + AUTHORITY + PATH_LIVE_FOLDER);
 
         /*
          * MIME type definitions

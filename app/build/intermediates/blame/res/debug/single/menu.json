@@ -1,7 +1,15 @@
 [
     {
+        "merged": "D:\\Source\\Android\\NotePad\\app\\build\\intermediates\\res\\merged\\debug\\menu\\list_options_menu.xml",
+        "source": "D:\\Source\\Android\\NotePad\\app\\src\\main\\res\\menu\\list_options_menu.xml"
+    },
+    {
         "merged": "E:\\gitrepos\\NotePad\\app\\build\\intermediates\\res\\merged\\debug\\menu\\editor_options_menu.xml",
         "source": "E:\\gitrepos\\NotePad\\app\\src\\main\\res\\menu\\editor_options_menu.xml"
+    },
+    {
+        "merged": "D:\\Source\\Android\\NotePad\\app\\build\\intermediates\\res\\merged\\debug\\menu\\list_context_menu.xml",
+        "source": "D:\\Source\\Android\\NotePad\\app\\src\\main\\res\\menu\\list_context_menu.xml"
     },
     {
         "merged": "E:\\gitrepos\\NotePad\\app\\build\\intermediates\\res\\merged\\debug\\menu\\list_context_menu.xml",
@@ -10,5 +18,9 @@
     {
         "merged": "E:\\gitrepos\\NotePad\\app\\build\\intermediates\\res\\merged\\debug\\menu\\list_options_menu.xml",
         "source": "E:\\gitrepos\\NotePad\\app\\src\\main\\res\\menu\\list_options_menu.xml"
+    },
+    {
+        "merged": "D:\\Source\\Android\\NotePad\\app\\build\\intermediates\\res\\merged\\debug\\menu\\editor_options_menu.xml",
+        "source": "D:\\Source\\Android\\NotePad\\app\\src\\main\\res\\menu\\editor_options_menu.xml"
     }
 ]
