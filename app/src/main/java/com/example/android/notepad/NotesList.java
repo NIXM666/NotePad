@@ -34,10 +34,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 
 /**
  * Displays a list of notes. Will display notes from the {@link Uri}
@@ -102,6 +101,7 @@ public class NotesList extends ListActivity {
          *
          * Please see the introductory note about performing provider operations on the UI thread.
          */
+
         Cursor cursor = managedQuery(
                 getIntent().getData(),            // Use the default content URI for the provider.
                 PROJECTION,                       // Return the note ID and title for each note.
@@ -109,6 +109,7 @@ public class NotesList extends ListActivity {
                 null,                             // No where clause, therefore no where column values.
                 NotePad.Notes.DEFAULT_SORT_ORDER  // Use the default sort order.
         );
+
         /*
          * The following two arrays create a "map" between columns in the cursor and view IDs
          * for items in the ListView. Each element in the dataColumns array represents
@@ -138,6 +139,37 @@ public class NotesList extends ListActivity {
         setListAdapter(adapter);
     }
 
+    public void searchNote(String string){
+        Cursor cursor = managedQuery(
+                getIntent().getData(),            // Use the default content URI for the provider.
+                PROJECTION,                       // Return the note ID and title for each note.
+                "`" + NotePad.Notes.COLUMN_NAME_TITLE + "` like '%" + string + "%'",                             // No where clause, return all records.
+                null,                             // No where clause, therefore no where column values.
+                NotePad.Notes.DEFAULT_SORT_ORDER  // Use the default sort order.
+        );
+
+        // The names of the cursor columns to display in the view, initialized to the title column
+        String[] dataColumns = {NotePad.Notes.COLUMN_NAME_TITLE, NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE};
+
+        // The view IDs that will display the cursor columns, initialized to the TextView in
+        // noteslist_item.xml
+        int[] viewIDs = {android.R.id.text1, android.R.id.text2};
+
+        // Creates the backing adapter for the ListView.
+        SimpleCursorAdapter adapter
+                = new MySimpleCursorAdapter(
+                NotesList.this,                             // The Context for the ListView
+                R.layout.noteslist_item,          // Points to the XML for a list item
+                cursor,                           // The cursor to get items from
+                dataColumns,
+                viewIDs
+        );
+
+        // Sets the ListView's adapter to be the cursor adapter that was just created.
+        setListAdapter(adapter);
+    }
+
+
     /**
      * Called when the user clicks the device's Menu button the first time for
      * this Activity. Android passes in a Menu object that is populated with items.
@@ -166,7 +198,20 @@ public class NotesList extends ListActivity {
         intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
         menu.addIntentOptions(Menu.CATEGORY_ALTERNATIVE, 0, 0,
                 new ComponentName(this, NotesList.class), null, intent, 0, null);
+        SearchView mSearchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String string) {
+                searchNote(string);
+                return true;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String string) {
+                searchNote(string);
+                return true;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 

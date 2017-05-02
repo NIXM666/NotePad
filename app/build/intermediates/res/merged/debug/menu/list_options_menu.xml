@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <!--  This is our one standard application action (creating a new note). -->
+    <item android:id="@+id/menu_search"
+        android:title="@string/menu_search"
+        android:showAsAction="always"
+        android:actionViewClass="android.widget.SearchView"  />
+
     <item android:id="@+id/menu_add"
           android:icon="@drawable/ic_menu_compose"
           android:title="@string/menu_add"
@@ -12,4 +17,5 @@
           android:icon="@drawable/ic_menu_compose"
           android:title="@string/menu_paste"
           android:alphabeticShortcut='p' />
+
 </menu>
