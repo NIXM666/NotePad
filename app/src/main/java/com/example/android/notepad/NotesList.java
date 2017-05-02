@@ -34,8 +34,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 /**
  * Displays a list of notes. Will display notes from the {@link Uri}
@@ -57,7 +59,8 @@ public class NotesList extends ListActivity {
      */
     private static final String[] PROJECTION = new String[]{
             NotePad.Notes._ID, // 0
-            NotePad.Notes.COLUMN_NAME_TITLE, // 1
+            NotePad.Notes.COLUMN_NAME_TITLE,
+            NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE// 1
     };
 
     /**
@@ -94,7 +97,6 @@ public class NotesList extends ListActivity {
          * ListView, and the context menu is handled by a method in NotesList.
          */
         getListView().setOnCreateContextMenuListener(this);
-
         /* Performs a managed query. The Activity handles closing and requerying the cursor
          * when needed.
          *
@@ -107,7 +109,6 @@ public class NotesList extends ListActivity {
                 null,                             // No where clause, therefore no where column values.
                 NotePad.Notes.DEFAULT_SORT_ORDER  // Use the default sort order.
         );
-
         /*
          * The following two arrays create a "map" between columns in the cursor and view IDs
          * for items in the ListView. Each element in the dataColumns array represents
@@ -117,15 +118,15 @@ public class NotesList extends ListActivity {
          */
 
         // The names of the cursor columns to display in the view, initialized to the title column
-        String[] dataColumns = {NotePad.Notes.COLUMN_NAME_TITLE};
+        String[] dataColumns = {NotePad.Notes.COLUMN_NAME_TITLE, NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE};
 
         // The view IDs that will display the cursor columns, initialized to the TextView in
         // noteslist_item.xml
-        int[] viewIDs = {android.R.id.text1};
+        int[] viewIDs = {android.R.id.text1, android.R.id.text2};
 
         // Creates the backing adapter for the ListView.
         SimpleCursorAdapter adapter
-                = new SimpleCursorAdapter(
+                = new MySimpleCursorAdapter(
                 this,                             // The Context for the ListView
                 R.layout.noteslist_item,          // Points to the XML for a list item
                 cursor,                           // The cursor to get items from
